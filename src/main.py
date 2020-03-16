@@ -2,13 +2,12 @@ import NFC_PN532 as nfc
 from machine import Pin, SPI
 
 # SPI
-spi_dev = SPI(2, baudrate=1000000, sck=Pin(18), mosi=Pin(23), miso=Pin(19))
+spi = SPI(1, baudrate=1000000, sck=Pin(18), mosi=Pin(23), miso=Pin(19))
 cs = Pin(5, Pin.OUT)
 cs.on()
-print("Init SPI")
 
 # SENSOR INIT
-pn532 = nfc.PN532(spi_dev,cs)
+pn532 = nfc.PN532(spi,cs)
 ic, ver, rev, support = pn532.get_firmware_version()
 print('Found PN532 with firmware version: {0}.{1}'.format(ver, rev))
 
